@@ -1,0 +1,9 @@
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+checkpoints/*.pth
+checkpoints/*.pt
+datasets/raw/
+datasets/manifest.csv
+.streamlit/
