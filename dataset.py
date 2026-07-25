@@ -108,11 +108,37 @@ RAW_LABEL_MAP = {
     "tomato_deficiency_roboflow/test/Magnesium_Deficiency":   ("tomato", "nutrient_deficiency", "magnesium"),
     "tomato_deficiency_roboflow/test/Iron_Deficiency":        ("tomato", "nutrient_deficiency", "iron"),
     "tomato_deficiency_roboflow/test/Manganese_Deficiency":   ("tomato", "nutrient_deficiency", "manganese"),
-    # tomato_plantdoc -> disease-only, robustness/disentanglement set
-    "tomato_plantdoc/Early_Blight":   ("tomato", "disease", None),
-    "tomato_plantdoc/Late_Blight":    ("tomato", "disease", None),
-    "tomato_plantdoc/Leaf_Mold":      ("tomato", "disease", None),
+    # tomato_plantdoc (Roboflow: tomatoes/plantdoc-tomatoes, field-condition
+    # images — real backgrounds, not lab/greenhouse shots like the other
+    # tomato set). Reorganized by reorganize_plantdoc.py using filename
+    # prefixes (the CSV export only had coarse/inconsistent Healthy/
+    # Unhealthy flags). Disease-only for the cause head, except Healthy.
+    # Richer than originally planned: adds Bacterial Spot, Mosaic Virus,
+    # Yellow Leaf Curl Virus, and Septoria on top of Early/Late Blight and
+    # Leaf Mold.
+    "tomato_plantdoc/train/Healthy":                ("tomato", "healthy", "healthy"),
+    "tomato_plantdoc/train/Early_Blight":            ("tomato", "disease", None),
+    "tomato_plantdoc/train/Late_Blight":              ("tomato", "disease", None),
+    "tomato_plantdoc/train/Leaf_Mold":                 ("tomato", "disease", None),
+    "tomato_plantdoc/train/Bacterial_Spot":            ("tomato", "disease", None),
+    "tomato_plantdoc/train/Mosaic_Virus":               ("tomato", "disease", None),
+    "tomato_plantdoc/train/Yellow_Leaf_Curl_Virus":      ("tomato", "disease", None),
+    "tomato_plantdoc/train/Septoria_Leaf_Spot":           ("tomato", "disease", None),
 
+    "tomato_plantdoc/valid/Healthy":                ("tomato", "healthy", "healthy"),
+    "tomato_plantdoc/valid/Late_Blight":              ("tomato", "disease", None),
+    "tomato_plantdoc/valid/Leaf_Mold":                 ("tomato", "disease", None),
+    "tomato_plantdoc/valid/Mosaic_Virus":               ("tomato", "disease", None),
+    "tomato_plantdoc/valid/Yellow_Leaf_Curl_Virus":      ("tomato", "disease", None),
+
+    "tomato_plantdoc/test/Healthy":                ("tomato", "healthy", "healthy"),
+    "tomato_plantdoc/test/Early_Blight":            ("tomato", "disease", None),
+    "tomato_plantdoc/test/Late_Blight":              ("tomato", "disease", None),
+    "tomato_plantdoc/test/Leaf_Mold":                 ("tomato", "disease", None),
+    "tomato_plantdoc/test/Bacterial_Spot":            ("tomato", "disease", None),
+    "tomato_plantdoc/test/Mosaic_Virus":               ("tomato", "disease", None),
+    "tomato_plantdoc/test/Yellow_Leaf_Curl_Virus":      ("tomato", "disease", None),
+    "tomato_plantdoc/test/Septoria_Leaf_Spot":           ("tomato", "disease", None),
     # wheat_n_deficiency_kaggle
     # wheat_n_deficiency_kaggle (Mendeley th422bg4yd, IARI). Two independent
     # sub-experiments, each with its own control (healthy) images — Ndeficient
