@@ -170,17 +170,20 @@ RAW_LABEL_MAP = {
     "cotton_disease_kaggle/cotton/curl_virus":      ("cotton", "disease", None),
     "cotton_disease_kaggle/cotton/bacterial_blight": ("cotton", "disease", None),
     "cotton_disease_kaggle/cotton/fussarium_wilt":   ("cotton", "disease", None),
-    # banana_deficiency_mendeley (8 micronutrient classes)
-    "banana_deficiency_mendeley/Healthy":   ("banana", "healthy", "healthy"),
-    "banana_deficiency_mendeley/Boron":     ("banana", "nutrient_deficiency", "boron"),
-    "banana_deficiency_mendeley/Calcium":   ("banana", "nutrient_deficiency", "calcium"),
-    "banana_deficiency_mendeley/Iron":      ("banana", "nutrient_deficiency", "iron"),
-    "banana_deficiency_mendeley/Potassium": ("banana", "nutrient_deficiency", "potassium"),
-    "banana_deficiency_mendeley/Magnesium": ("banana", "nutrient_deficiency", "magnesium"),
-    "banana_deficiency_mendeley/Manganese": ("banana", "nutrient_deficiency", "manganese"),
-    "banana_deficiency_mendeley/Sulphur":   ("banana", "nutrient_deficiency", "sulfur"),
-    "banana_deficiency_mendeley/Zinc":      ("banana", "nutrient_deficiency", "zinc"),
-
+    # banana_deficiency_mendeley (Sunitha et al., Mendeley 7vpdrbdkd4).
+    # Using only the RAW folder, not Augmented — including both risks
+    # near-duplicate images leaking across train/val once real splitting
+    # is added, since dataset.py doesn't split yet. Augmented can be added
+    # later alongside proper split logic if more data is needed.
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/healthy":   ("banana", "healthy", "healthy"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/boron":     ("banana", "nutrient_deficiency", "boron"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/calcium":   ("banana", "nutrient_deficiency", "calcium"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/iron":      ("banana", "nutrient_deficiency", "iron"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/potassium": ("banana", "nutrient_deficiency", "potassium"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/magnesium": ("banana", "nutrient_deficiency", "magnesium"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/manganese": ("banana", "nutrient_deficiency", "manganese"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/sulphur":   ("banana", "nutrient_deficiency", "sulfur"),
+    "banana_deficiency_mendeley/Nutrient Deficient RAW Images of Banana Leaves/zinc":      ("banana", "nutrient_deficiency", "zinc"),
     # coffee_coleafdb_mendeley
     "coffee_coleafdb_mendeley/Healthy":   ("coffee", "healthy", "healthy"),
     "coffee_coleafdb_mendeley/Boron":     ("coffee", "nutrient_deficiency", "boron"),
