@@ -50,11 +50,12 @@ RAW_LABEL_MAP = {
     "rice_npk_kaggle/Phosphorus(P)":  ("rice", "nutrient_deficiency", "phosphorus"),
     "rice_npk_kaggle/Potassium(K)":   ("rice", "nutrient_deficiency", "potassium"),
 
-    # rice_disease_kaggle (vbookshelf rice leaf diseases) -> disentanglement only
-    "rice_disease_kaggle/BacterialLeafBlight": ("rice", "disease", None),
-    "rice_disease_kaggle/BrownSpot":           ("rice", "disease", None),
-    "rice_disease_kaggle/LeafSmut":            ("rice", "disease", None),
-
+    # rice_disease_kaggle (vbookshelf/rice-leaf-diseases) -> disentanglement
+    # only. Real folder names have spaces and are nested one level under
+    # rice_leaf_diseases/.
+    "rice_disease_kaggle/rice_leaf_diseases/Bacterial leaf blight": ("rice", "disease", None),
+    "rice_disease_kaggle/rice_leaf_diseases/Brown spot":            ("rice", "disease", None),
+    "rice_disease_kaggle/rice_leaf_diseases/Leaf smut":             ("rice", "disease", None),
     # maize_npk_kaggle (ashishpatelresearch/maize-plant-leaf-nutrient-
     # deficiency-dataset) — real folder structure is nested under
     # Nutrition_dataset/{train,test}/<class>. "AB" = "absent" (deficient).
@@ -134,12 +135,15 @@ RAW_LABEL_MAP = {
     "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/test/control":   ("wheat", "healthy", "healthy"),
     "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/test/diseased":  ("wheat", "disease", None),
 
-    # cotton_disease_kaggle -> disease-only crop, no deficiency labels exist
-    "cotton_disease_kaggle/Healthy":        ("cotton", "healthy", "healthy"),
-    "cotton_disease_kaggle/CurlVirus":      ("cotton", "disease", None),
-    "cotton_disease_kaggle/BacterialBlight": ("cotton", "disease", None),
-    "cotton_disease_kaggle/FusariumWilt":   ("cotton", "disease", None),
-
+   # cotton_disease_kaggle (seroshkarim/cotton-leaf-disease-dataset) ->
+    # disease-only, few-shot transfer target crop. Real folders are nested
+    # under cotton/, lowercase snake_case. Note: source dataset spells it
+    # "fussarium_wilt" (typo in the original upload) — kept as-is to match
+    # the actual folder name on disk.
+    "cotton_disease_kaggle/cotton/healthy":         ("cotton", "healthy", "healthy"),
+    "cotton_disease_kaggle/cotton/curl_virus":      ("cotton", "disease", None),
+    "cotton_disease_kaggle/cotton/bacterial_blight": ("cotton", "disease", None),
+    "cotton_disease_kaggle/cotton/fussarium_wilt":   ("cotton", "disease", None),
     # banana_deficiency_mendeley (8 micronutrient classes)
     "banana_deficiency_mendeley/Healthy":   ("banana", "healthy", "healthy"),
     "banana_deficiency_mendeley/Boron":     ("banana", "nutrient_deficiency", "boron"),
