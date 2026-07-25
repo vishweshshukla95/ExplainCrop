@@ -16,6 +16,10 @@ from typing import Dict, List
 # Crops with usable public NPK-deficiency data (your primary training set).
 CROPS_PRIMARY = ["rice", "maize", "tomato", "wheat"]
 
+# Cucurbits from the EarlyNSD dataset — real deficiency labels (N, K only;
+# no phosphorus class exists in this dataset), early-stage/subtle symptoms.
+CROPS_EARLYNSD = ["ashgourd", "bittergourd", "snakegourd"]
+
 # Crops used ONLY for the disentanglement head (disease/pest images, no
 # deficiency labels needed) — widens robustness without needing deficiency
 # annotations for every crop.
@@ -28,14 +32,17 @@ CROPS_MICRONUTRIENT = ["banana", "coffee"]
 # Crop with NO deficiency data at all — the few-shot transfer target.
 CROP_FEWSHOT_TARGET = "cotton"
 
-ALL_CROPS = CROPS_PRIMARY + CROPS_DISEASE_ONLY + CROPS_MICRONUTRIENT
+ALL_CROPS = CROPS_PRIMARY + CROPS_EARLYNSD + CROPS_DISEASE_ONLY + CROPS_MICRONUTRIENT
 CROP_TO_IDX = {c: i for i, c in enumerate(ALL_CROPS)}
 
 # "Cause" head — the disease-vs-deficiency disentanglement classes.
 CAUSE_CLASSES = ["healthy", "nutrient_deficiency", "disease", "pest"]
 
-# NPK deficiency classes shared across the primary crops.
-NPK_CLASSES = ["healthy", "nitrogen", "phosphorus", "potassium"]
+# NPK deficiency classes shared across the primary crops. Zinc was added
+# because the maize dataset (ZNAB) has a real, well-populated zinc-deficiency
+# class, and zinc already exists in MICRONUTRIENT_CLASSES below — this lets
+# maize contribute to the micronutrient objective too, not just macro-NPK.
+NPK_CLASSES = ["healthy", "nitrogen", "phosphorus", "potassium", "zinc"]
 
 # Extended micronutrient classes (banana/coffee pretraining only).
 MICRONUTRIENT_CLASSES = [
