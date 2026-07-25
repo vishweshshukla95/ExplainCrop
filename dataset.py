@@ -18,7 +18,7 @@ datasets/
     maize_npk_kaggle/Nutrition_dataset/{train,test}/<class_folders>/*.jpg
     tomato_deficiency_roboflow/{train,valid,test}/<class_folders>/*.jpg
     tomato_plantdoc/<class_folders>/*.jpg
-    wheat_n_deficiency_kaggle/<class_folders>/*.jpg
+    wheat_n_deficiency_kaggle/th422bg4yd-1/{Ndeficient,WheatLeafRust}/{train,val,test}/<class_folders>/*.jpg
     cotton_disease_kaggle/<class_folders>/*.jpg
     banana_deficiency_mendeley/<class_folders>/*.jpg
     coffee_coleafdb_mendeley/<class_folders>/*.jpg
@@ -113,9 +113,26 @@ RAW_LABEL_MAP = {
     "tomato_plantdoc/Leaf_Mold":      ("tomato", "disease", None),
 
     # wheat_n_deficiency_kaggle
-    "wheat_n_deficiency_kaggle/Healthy":   ("wheat", "healthy", "healthy"),
-    "wheat_n_deficiency_kaggle/Nitrogen":  ("wheat", "nutrient_deficiency", "nitrogen"),
-    "wheat_n_deficiency_kaggle/LeafRust":  ("wheat", "disease", None),
+    # wheat_n_deficiency_kaggle (Mendeley th422bg4yd, IARI). Two independent
+    # sub-experiments, each with its own control (healthy) images — Ndeficient
+    # is the abiotic-stress half (control vs nitrogen-deficient), WheatLeafRust
+    # is the biotic-stress half (control vs leaf-rust diseased). Both halves'
+    # "control" images map to healthy; keeping them under one shared "wheat"
+    # crop is correct since the label taxonomy (cause/deficiency), not the
+    # sub-experiment, is what matters downstream.
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/Ndeficient/train/control":    ("wheat", "healthy", "healthy"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/Ndeficient/train/deficiency": ("wheat", "nutrient_deficiency", "nitrogen"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/Ndeficient/val/control":      ("wheat", "healthy", "healthy"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/Ndeficient/val/deficiency":   ("wheat", "nutrient_deficiency", "nitrogen"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/Ndeficient/test/control":     ("wheat", "healthy", "healthy"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/Ndeficient/test/deficiency":  ("wheat", "nutrient_deficiency", "nitrogen"),
+
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/train/control":  ("wheat", "healthy", "healthy"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/train/diseased": ("wheat", "disease", None),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/val/control":    ("wheat", "healthy", "healthy"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/val/diseased":   ("wheat", "disease", None),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/test/control":   ("wheat", "healthy", "healthy"),
+    "wheat_n_deficiency_kaggle/th422bg4yd-1/WheatLeafRust/test/diseased":  ("wheat", "disease", None),
 
     # cotton_disease_kaggle -> disease-only crop, no deficiency labels exist
     "cotton_disease_kaggle/Healthy":        ("cotton", "healthy", "healthy"),
