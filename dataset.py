@@ -16,7 +16,7 @@ datasets/
     rice_npk_kaggle/<class_folders>/*.jpg
     rice_disease_kaggle/<class_folders>/*.jpg
     maize_npk_kaggle/Nutrition_dataset/{train,test}/<class_folders>/*.jpg
-    tomato_deficiency_roboflow/<class_folders>/*.jpg
+    tomato_deficiency_roboflow/{train,valid,test}/<class_folders>/*.jpg
     tomato_plantdoc/<class_folders>/*.jpg
     wheat_n_deficiency_kaggle/<class_folders>/*.jpg
     cotton_disease_kaggle/<class_folders>/*.jpg
@@ -77,12 +77,36 @@ RAW_LABEL_MAP = {
     "maize_npk_kaggle/Nutrition_dataset/test/ALLAB":        ("maize", "nutrient_deficiency", None),
 
     # tomato_deficiency_roboflow
-    "tomato_deficiency_roboflow/Healthy":            ("tomato", "healthy", "healthy"),
-    "tomato_deficiency_roboflow/Nitrogen_Deficiency": ("tomato", "nutrient_deficiency", "nitrogen"),
-    "tomato_deficiency_roboflow/Potassium_Deficiency": ("tomato", "nutrient_deficiency", "potassium"),
-    "tomato_deficiency_roboflow/Magnesium_Deficiency": ("tomato", "nutrient_deficiency", "magnesium"),
-    "tomato_deficiency_roboflow/Iron_Deficiency":      ("tomato", "nutrient_deficiency", "iron"),
+   # tomato_deficiency_roboflow (Roboflow: tomato-nutrient-deficiency/
+    # tomato-leaf-3jffl, multi-label classification export, reorganized by
+    # reorganize_tomato.py using _classes.csv as ground truth). Split into
+    # train/valid/test; magnesium/iron/manganese deficiency_class values are
+    # outside NPK_CLASSES so they get npk_idx=-100 (ignored by the
+    # deficiency head, same treatment as banana/coffee micronutrients) but
+    # still contribute to the cause head.
+    "tomato_deficiency_roboflow/train/Healthy":                ("tomato", "healthy", "healthy"),
+    "tomato_deficiency_roboflow/train/Nitrogen_Deficiency":    ("tomato", "nutrient_deficiency", "nitrogen"),
+    "tomato_deficiency_roboflow/train/Phosphorus_Deficiency":  ("tomato", "nutrient_deficiency", "phosphorus"),
+    "tomato_deficiency_roboflow/train/Potassium_Deficiency":   ("tomato", "nutrient_deficiency", "potassium"),
+    "tomato_deficiency_roboflow/train/Magnesium_Deficiency":   ("tomato", "nutrient_deficiency", "magnesium"),
+    "tomato_deficiency_roboflow/train/Iron_Deficiency":        ("tomato", "nutrient_deficiency", "iron"),
+    "tomato_deficiency_roboflow/train/Manganese_Deficiency":   ("tomato", "nutrient_deficiency", "manganese"),
 
+    "tomato_deficiency_roboflow/valid/Healthy":                ("tomato", "healthy", "healthy"),
+    "tomato_deficiency_roboflow/valid/Nitrogen_Deficiency":    ("tomato", "nutrient_deficiency", "nitrogen"),
+    "tomato_deficiency_roboflow/valid/Phosphorus_Deficiency":  ("tomato", "nutrient_deficiency", "phosphorus"),
+    "tomato_deficiency_roboflow/valid/Potassium_Deficiency":   ("tomato", "nutrient_deficiency", "potassium"),
+    "tomato_deficiency_roboflow/valid/Magnesium_Deficiency":   ("tomato", "nutrient_deficiency", "magnesium"),
+    "tomato_deficiency_roboflow/valid/Iron_Deficiency":        ("tomato", "nutrient_deficiency", "iron"),
+    "tomato_deficiency_roboflow/valid/Manganese_Deficiency":   ("tomato", "nutrient_deficiency", "manganese"),
+
+    "tomato_deficiency_roboflow/test/Healthy":                ("tomato", "healthy", "healthy"),
+    "tomato_deficiency_roboflow/test/Nitrogen_Deficiency":    ("tomato", "nutrient_deficiency", "nitrogen"),
+    "tomato_deficiency_roboflow/test/Phosphorus_Deficiency":  ("tomato", "nutrient_deficiency", "phosphorus"),
+    "tomato_deficiency_roboflow/test/Potassium_Deficiency":   ("tomato", "nutrient_deficiency", "potassium"),
+    "tomato_deficiency_roboflow/test/Magnesium_Deficiency":   ("tomato", "nutrient_deficiency", "magnesium"),
+    "tomato_deficiency_roboflow/test/Iron_Deficiency":        ("tomato", "nutrient_deficiency", "iron"),
+    "tomato_deficiency_roboflow/test/Manganese_Deficiency":   ("tomato", "nutrient_deficiency", "manganese"),
     # tomato_plantdoc -> disease-only, robustness/disentanglement set
     "tomato_plantdoc/Early_Blight":   ("tomato", "disease", None),
     "tomato_plantdoc/Late_Blight":    ("tomato", "disease", None),
