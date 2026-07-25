@@ -1,3 +1,4 @@
+
 # ExplainCrop
 
 An explainable, multi-crop nutrient deficiency detection and fertilizer
@@ -89,3 +90,5 @@ python dataset.py     # builds datasets/manifest.csv, warns about unmapped folde
   the pretrained ViT positional embeddings were sized for — positional
   embeddings need interpolation/fine-tuning at training start (handled in
   `train.py`, flag if you see shape mismatches).
+
+ ae1852141bd5b8b313c78a3e2c9788c51f1a68bf
