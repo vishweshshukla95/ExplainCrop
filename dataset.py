@@ -28,6 +28,7 @@ datasets/
 
 import csv
 import os
+import random
 from dataclasses import dataclass
 from typing import List, Optional
 
@@ -257,11 +258,30 @@ def build_manifest(raw_dir: str, out_csv: str) -> None:
                 "severity": "unlabeled",  # filled in later by weak labeling, see severity.py
             })
 
+# Stratified train/val split by crop — a plain random split risks
+    # starving rare crops (e.g. wheat at ~1.5K images vs maize at ~17.6K)
+    # of validation examples. 85/15 split, shuffled deterministically.
+    random.seed(42)
+    by_crop = {}
+    for row in rows:
+        by_crop.setdefault(row["crop"], []).append(row)
+
+    for crop_rows in by_crop.values():
+        random.shuffle(crop_rows)
+        n_val = max(1, int(len(crop_rows) * 0.15))
+        for i, row in enumerate(crop_rows):
+            row["split"] = "val" if i < n_val else "train"
+
     with open(out_csv, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=[
-            "image_path", "crop", "cause", "deficiency_class", "severity"])
+            "image_path", "crop", "cause", "deficiency_class", "severity", "split"])
         writer.writeheader()
         writer.writerows(rows)
+
+    print(f"Wrote {len(rows)} rows to {out_csv}")
+    n_train = sum(1 for r in rows if r["split"] == "train")
+    n_val = sum(1 for r in rows if r["split"] == "val")
+    print(f"Split: {n_train} train, {n_val} val")
 
     print(f"Wrote {len(rows)} rows to {out_csv}")
     if skipped:
@@ -288,6 +308,9 @@ class ExplainCropDataset(Dataset):
         self.samples: List[Sample] = []
         with open(manifest_csv) as f:
             for row in csv.DictReader(f):
+                if row.get("split", "train") != split:
+                    continue
+                row.pop("split", None)
                 self.samples.append(Sample(**row))
 
         mean, std = [0.485, 0.456, 0.406], [0.229, 0.224, 0.225]
