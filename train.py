@@ -167,8 +167,18 @@ def train_model(manifest_csv: str = None, cfg=CFG):
 
     os.makedirs(cfg.checkpoint_dir, exist_ok=True)
     best_val_loss = float("inf")
+    start_epoch = 1
 
-    for epoch in range(1, cfg.epochs + 1):
+    ckpt_path = os.path.join(cfg.checkpoint_dir, "best_model.pt")
+    if os.path.exists(ckpt_path):
+        checkpoint = torch.load(ckpt_path, map_location=device)
+        model.load_state_dict(checkpoint["model_state_dict"])
+        optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+        best_val_loss = checkpoint["val_loss"]
+        start_epoch = checkpoint["epoch"] + 1
+        print(f"Resumed from checkpoint: epoch {checkpoint['epoch']}, val_loss={best_val_loss:.4f}")
+
+    for epoch in range(start_epoch, cfg.epochs + 1):
         t0 = time.time()
         train_metrics = run_epoch(model, train_loader, optimizer, device, train=True)
         val_metrics = run_epoch(model, val_loader, optimizer, device, train=False)

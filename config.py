@@ -70,7 +70,7 @@ class Config:
     num_severity_levels: int = len(SEVERITY_LEVELS)
 
     # --- training ---
-    epochs: int = 50
+    epochs: int = 8
     lr: float = 3e-5
     weight_decay: float = 1e-4
     warmup_epochs: int = 5
